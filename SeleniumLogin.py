@@ -12,11 +12,20 @@ time.sleep(3)
 driver.find_element_by_xpath("//*[@id='passwordNext']/span/span").click()
 
 #open beta review page
-time.sleep(3)
+time.sleep(10)
 driver.find_element_by_xpath("/html/body/div[2]/div/div[2]/div/div[2]/div/div[3]/div/div[2]/div/div[1]/div/div/div[2]/div[3]/div[1]/table/tbody[1]/tr/td[1]/div").click()
-time.sleep(5)
+time.sleep(10)
 driver.find_element_by_xpath("/html/body/div[2]/div/div[2]/div/div[2]/div/div[1]/div[1]/nav/ul/li[9]/button").click()
-time.sleep(7)
-driver.find_element_by_xpath("//*[@id='gwt-uid-2175']/ul/li[4]").click()
+time.sleep(10)
+driver.find_element_by_xpath("//*[@id='gwt-uid-2253']/ul/li[4]").click()
+
+# get page html
+driver.get("https://play.google.com/apps/publish/?hl=zh-tw&account=7711559340013331641#BetaFeedbackPlace:p=com.silvrlin.within&appid=4973651716943245306")
+html = driver.page_source
+
+
+# go to next page
+time.sleep(10)
+driver.find_element_by_xpath("/html/body/div[2]/div/div[2]/div/div[2]/div/div[3]/div/div[2]/div/div[1]/div/div/div[2]/div/section/div[4]/div[2]/div[3]/div[4]/span[2]/div/button[2]").click()
 
 
