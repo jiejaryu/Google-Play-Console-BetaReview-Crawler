@@ -1,5 +1,7 @@
 from selenium import webdriver
-import time 
+import time
+import pandas as pd
+from bs4 import BeautifulSoup
 
 # login google play console page
 driver = webdriver.Chrome("chromedriver.exe")
@@ -22,10 +24,17 @@ driver.find_element_by_xpath("//*[@id='gwt-uid-2253']/ul/li[4]").click()
 # get page html
 driver.get("https://play.google.com/apps/publish/?hl=zh-tw&account=7711559340013331641#BetaFeedbackPlace:p=com.silvrlin.within&appid=4973651716943245306")
 html = driver.page_source
+print(driver.title)
 
+# create html file
+soup = BeautifulSoup(driver.page_source, "lxml")
+fp = open("index.html", "w", encoding="utf8")
+fp.write(soup.prettify())
+print("寫入檔案index.html...")
+fp.close()
+driver.quit()
 
 # go to next page
 time.sleep(10)
 driver.find_element_by_xpath("/html/body/div[2]/div/div[2]/div/div[2]/div/div[3]/div/div[2]/div/div[1]/div/div/div[2]/div/section/div[4]/div[2]/div[3]/div[4]/span[2]/div/button[2]").click()
-
 
