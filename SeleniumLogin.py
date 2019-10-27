@@ -15,27 +15,49 @@ time.sleep(3)
 driver.find_element_by_xpath("//*[@id='passwordNext']/span/span").click()
 
 #open beta review page
-time.sleep(10)
+time.sleep(5)
 driver.find_element_by_xpath("/html/body/div[2]/div/div[2]/div/div[2]/div/div[3]/div/div[2]/div/div[1]/div/div/div[2]/div[3]/div[1]/table/tbody[1]/tr/td[1]/div").click()
-time.sleep(10)
-driver.find_element_by_xpath("/html/body/div[2]/div/div[2]/div/div[2]/div/div[1]/div[1]/nav/ul/li[9]/button").click()
-time.sleep(10)
-driver.find_element_by_xpath("//*[@id='gwt-uid-2253']/ul/li[4]").click()
+time.sleep(5)
+driver.get("YOUR BETA REVIEW PAGE URL") # the url of your beta review page
+time.sleep(5)
+print(driver.title) #check current page
 
 # get page html
-driver.get("https://play.google.com/apps/publish/?hl=zh-tw&account=7711559340013331641#BetaFeedbackPlace:p=com.silvrlin.within&appid=4973651716943245306")
 html = driver.page_source
-print(driver.title)
 
 # create html file
 soup = BeautifulSoup(driver.page_source, "lxml")
 fp = open("index.html", "w", encoding="utf8")
 fp.write(soup.prettify())
-print("寫入檔案index.html...")
+print("寫入檔案 index.html...")
 fp.close()
 driver.quit()
 
-# go to next page
-time.sleep(10)
-driver.find_element_by_xpath("/html/body/div[2]/div/div[2]/div/div[2]/div/div[3]/div/div[2]/div/div[1]/div/div/div[2]/div/section/div[4]/div[2]/div[3]/div[4]/span[2]/div/button[2]").click()
+### get local html file content
+soup = BeautifulSoup(open("index.html"),'lxml')
+#print(soup)
+
+
+### get user name
+user_names = soup.select('span.GNVPVGB-Bn-j strong')
+nameList= []
+for name in user_names:
+    nameList = nameList + [name.string.strip()]
+
+print(nameList)
+
+
+### get user rating
+userRatings = soup.find_all("div", class_ = "GNVPVGB-Yn-b GNVPVGB-md-m")
+
+reviewList= []
+for review in userRatings:
+    reviewList = reviewList + [review['aria-label']]
+
+print(reviewList)
+
+
+# # go to next page -> will do this function later
+# time.sleep(10)
+# driver.find_element_by_xpath("/html/body/div[2]/div/div[2]/div/div[2]/div/div[3]/div/div[2]/div/div[1]/div/div/div[2]/div/section/div[4]/div[2]/div[3]/div[4]/span[2]/div/button[2]").click()
 
