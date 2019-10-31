@@ -29,7 +29,7 @@ html = driver.page_source
 soup = BeautifulSoup(driver.page_source, "lxml")
 fp = open("index.html", "w", encoding="utf8")
 fp.write(soup.prettify())
-print("寫入檔案 index.html...")
+print("Writing File index.html...")
 fp.close()
 driver.quit()
 
@@ -55,6 +55,18 @@ for review in userRatings:
     reviewList = reviewList + [review['aria-label']]
 
 print(reviewList)
+
+
+### get rating time
+
+ratingTime = soup.select('span.GNVPVGB-rn-j')
+
+timeList = []
+for time in ratingTime:
+    timeList = timeList + [time.text.strip()]
+
+print(timeList)
+
 
 
 # # go to next page -> will do this function later
